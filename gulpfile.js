@@ -12,7 +12,7 @@ gulp.task('connect', ['index:dev'], function() {
   connect.server({
     root: '.',
     livereload: true,
-    port: 80,
+    port: 8080,
     host: 'fe.youlook.net'
   });
 });

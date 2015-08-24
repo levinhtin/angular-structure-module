@@ -21,6 +21,8 @@
     "bootstrap": "~3.3.5",
     "font-awesome": "~4.4.0",
     "moment": "~2.10.6",
-    "toastr": "~2.1.2"
+    "toastr": "~2.1.2",
+    "oclazyload": "~1.0.4",
+    "extras.angular.plus": "~0.9.2"
   }
 }
