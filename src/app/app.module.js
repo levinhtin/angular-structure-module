@@ -4,9 +4,9 @@
     angular.module('app', [
         'app.core',
         'app.widgets',
-        'app.admin',
-        'app.home',
-        'app.layout'
+        'app.layout',
+        'app.module.admin',
+        'app.module.home'
     ]);
 
 })();

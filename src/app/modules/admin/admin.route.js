@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app.admin')
+        .module('app.module.admin')
         .run(appRun);
 
     appRun.$inject = ['routerHelper'];
@@ -24,6 +24,20 @@
                     settings: {
                         nav: 2,
                         content: '<i class="fa fa-lock"></i> Admin'
+                    }
+                }
+            },
+            {
+                state: 'admin.user',
+                config: {
+                    url: '/user',
+                    templateUrl: 'src/app/modules/admin/user.html',
+                    controller: 'UserController',
+                    controllerAs: 'vm',
+                    title: 'User',
+                    settings: {
+                        nav: 2,
+                        content: '<i class="fa fa-lock"></i> User'
                     }
                 }
             }
