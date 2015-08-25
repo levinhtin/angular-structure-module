@@ -14,7 +14,7 @@
 
     var config = {
         appErrorPrefix: '[helloWorld Error] ',
-        appTitle: 'helloWorld'
+        appTitle: 'Youlook'
     };
 
     core.value('config', config);
@@ -24,12 +24,12 @@
     configure.$inject = ['$locationProvider', '$logProvider', 'routerHelperProvider', 'exceptionHandlerProvider'];
     /* @ngInject */
     function configure($locationProvider, $logProvider, routerHelperProvider, exceptionHandlerProvider) {
-        $locationProvider.html5Mode(false).hashPrefix('!');
+
         if ($logProvider.debugEnabled) {
             $logProvider.debugEnabled(true);
         }
         exceptionHandlerProvider.configure(config.appErrorPrefix);
-        routerHelperProvider.configure({docTitle: config.appTitle + ': '});
+        routerHelperProvider.configure({docTitle: config.appTitle + ' | '});
     }
 
 })();

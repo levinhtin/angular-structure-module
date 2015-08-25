@@ -15,7 +15,8 @@
             resolveAlways: {}
         };
 
-        $locationProvider.html5Mode(true);
+        // $locationProvider.html5Mode(true);
+        $locationProvider.html5Mode(false).hashPrefix('!');
 
         this.configure = function(cfg) {
             angular.extend(config, cfg);
@@ -33,6 +34,7 @@
             };
 
             var service = {
+                configureWhen: configureWhen,
                 configureStates: configureStates,
                 getStates: getStates,
                 stateCounts: stateCounts
@@ -43,6 +45,11 @@
             return service;
 
             ///////////////
+            function configureWhen(when, whenPath){
+                if (when != null && when != undefined && whenPath) {
+                    $urlRouterProvider.when(when, whenPath);
+                }
+            };
 
             function configureStates(states, otherwisePath) {
                 states.forEach(function(state) {
@@ -54,7 +61,7 @@
                     hasOtherwise = true;
                     $urlRouterProvider.otherwise(otherwisePath);
                 }
-            }
+            };
 
             function handleRoutingErrors() {
                 // Route cancellation:
@@ -77,14 +84,14 @@
                         $location.path('/');
                     }
                 );
-            }
+            };
 
             function init() {
                 handleRoutingErrors();
                 updateDocTitle();
-            }
+            };
 
-            function getStates() { return $state.get(); }
+            function getStates() { return $state.get(); };
 
             function updateDocTitle() {
                 $rootScope.$on('$stateChangeSuccess',
@@ -95,7 +102,7 @@
                         $rootScope.title = title; // data bind to <title>
                     }
                 );
-            }
-        }
-    }
+            };
+        };
+    };
 })();
