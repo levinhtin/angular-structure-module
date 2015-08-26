@@ -94,8 +94,19 @@ gulp.task('min:js', ['clean:js', 'min:js:vendor', 'min:js:app']);
 gulp.task('min', ['min:js']);
 
 //----------------HTML---------------------------
-gulp.task('html:debug', ['concat'], function () {
+gulp.task('html:dev', function () {
+  // var bowerStream = gulp.src('./bower.json').pipe(mainBowerFiles( ));
+  // console.log(bowerStream);
     gulp.src(paths.webroot + 'src/index.html')
+    .pipe(using())
+    .pipe(inject(gulp.src(paths.appJs, {read: false}), {starttag: '<!-- inject:app:{{ext}} -->'}))
+    .pipe(inject(gulp.src('./bower.json', {read:true}).pipe(mainBowerFiles()), {relative: true, starttag: '<!-- inject:vendor:{{ext}} -->'}))
+    .pipe(gulp.dest(paths.webroot)); 
+    
+});
+
+gulp.task('html:debug', ['concat'], function () {
+    return gulp.src(paths.webroot + 'src/index.html')
     .pipe(using())
     .pipe(inject(gulp.src(paths.webroot +'dist/**/app*.min.js', {read: false}), {starttag: '<!-- inject:app:{{ext}} -->'}))
     .pipe(inject(gulp.src(paths.webroot +'dist/**/vendor*.min.js', {read: false}), {starttag: '<!-- inject:vendor:{{ext}} -->'}))
@@ -103,7 +114,7 @@ gulp.task('html:debug', ['concat'], function () {
 });
 
 gulp.task('html:release', ['min'], function () {
-    gulp.src(paths.webroot + 'src/index.html')
+    return gulp.src(paths.webroot + 'src/index.html')
     .pipe(using())
     .pipe(inject(gulp.src(paths.webroot +'dist/**/app*.min.js', {read: false}), {starttag: '<!-- inject:app:{{ext}} -->'}))
     .pipe(inject(gulp.src(paths.webroot +'dist/**/vendor*.min.js', {read: false}), {starttag: '<!-- inject:vendor:{{ext}} -->'}))
@@ -119,6 +130,7 @@ gulp.task('connect', function() {
   });
 });
 //-----------------RUN--------------------------------
+gulp.task('dev', ['html:dev', 'connect']);
 gulp.task('debug', ['html:debug', 'connect']);
 gulp.task('release', ['html:release', 'connect']);
 

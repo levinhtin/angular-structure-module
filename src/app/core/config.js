@@ -3,6 +3,12 @@
 
     var core = angular.module('app.core');
 
+    core.config(interceptorConfig);
+    interceptorConfig.$inject = ['$httpProvider']; 
+    function interceptorConfig($httpProvider) {
+      $httpProvider.interceptors.push('ylHttpInterceptor');
+    };
+
     core.config(toastrConfig);
 
     toastrConfig.$inject = ['toastr'];
@@ -24,12 +30,10 @@
     configure.$inject = ['$locationProvider', '$logProvider', 'routerHelperProvider', 'exceptionHandlerProvider'];
     /* @ngInject */
     function configure($locationProvider, $logProvider, routerHelperProvider, exceptionHandlerProvider) {
-
         if ($logProvider.debugEnabled) {
             $logProvider.debugEnabled(true);
         }
         exceptionHandlerProvider.configure(config.appErrorPrefix);
         routerHelperProvider.configure({docTitle: config.appTitle + ' | '});
     }
-
 })();
