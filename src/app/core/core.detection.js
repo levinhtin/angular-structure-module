@@ -11,5 +11,5 @@
     // if($detectionDevice.isMobile != null){
     //   window.location.href = 'http://google.com';
     // }
-  };
+  }
 })();

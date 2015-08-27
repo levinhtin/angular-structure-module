@@ -34,6 +34,14 @@ gulp.task('clean:js', function() {
 });
 gulp.task('clean', ['clean:js']);
 
+//-----------JSHINT-----------------
+gulp.task('jshint:app', function(){
+  //min app
+  return gulp.src(paths.appJs)
+    .pipe(jshint())
+    .pipe(jshint.reporter('default'));
+});
+
 //-----------CONCAT-----------------
 gulp.task('concat:js:app', function(){
   return gulp.src(paths.appJs)

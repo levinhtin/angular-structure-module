@@ -67,7 +67,7 @@ adaptive.provider('$detectionDevice', [function() {
   var tmp = ua.split('[FBAN');
   if (typeof tmp[1] !== 'undefined') {
       ua = tmp[0];
-  };
+  }
 
   var isMobile = {
       Android: function() {

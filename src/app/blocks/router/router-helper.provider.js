@@ -14,9 +14,25 @@
             docTitle: undefined,
             resolveAlways: {}
         };
+        // $provide.decorator('$sniffer', ['$delegate', function($sniffer) {
+        //     var msie = 0;
+        //     try {
+        //         msie = parseInt((/msie (\d+)/.exec(angular.lowercase(navigator.userAgent)) || [])[1], 10);
+        //     } catch (e) {
+        //         console.log("MSIE error:", e);
+        //     }
+        //     var _hasEvent = $sniffer.hasEvent;
+        //     $sniffer.hasEvent = function(event) {
+        //         if (event === 'input' && msie === 10) {
+        //             return false;
+        //         }
+        //         _hasEvent.call(this, event);
+        //     }
+        //     return $sniffer;
+        // }]);
 
-        // $locationProvider.html5Mode(true);
-        $locationProvider.html5Mode(false).hashPrefix('!');
+        $locationProvider.html5Mode(true);
+        // $locationProvider.html5Mode(false).hashPrefix('!');
 
         this.configure = function(cfg) {
             angular.extend(config, cfg);
@@ -49,7 +65,7 @@
                 if (when != null && when != undefined && whenPath) {
                     $urlRouterProvider.when(when, whenPath);
                 }
-            };
+            }
 
             function configureStates(states, otherwisePath) {
                 states.forEach(function(state) {
@@ -61,7 +77,7 @@
                     hasOtherwise = true;
                     $urlRouterProvider.otherwise(otherwisePath);
                 }
-            };
+            }
 
             function handleRoutingErrors() {
                 // Route cancellation:
@@ -84,12 +100,12 @@
                         $location.path('/');
                     }
                 );
-            };
+            }
 
             function init() {
                 handleRoutingErrors();
                 updateDocTitle();
-            };
+            }
 
             function getStates() { return $state.get(); };
 
@@ -102,7 +118,7 @@
                         $rootScope.title = title; // data bind to <title>
                     }
                 );
-            };
-        };
-    };
+            }
+        }
+    }
 })();

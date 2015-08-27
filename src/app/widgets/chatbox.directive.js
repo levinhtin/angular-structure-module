@@ -28,6 +28,6 @@
                 console.log(mess);
                 scope.$broadcast('form:submit');
             });
-        };
+        }
     }
 })();

@@ -7,7 +7,7 @@
     interceptorConfig.$inject = ['$httpProvider']; 
     function interceptorConfig($httpProvider) {
       $httpProvider.interceptors.push('ylHttpInterceptor');
-    };
+    }
 
     core.config(toastrConfig);
 
