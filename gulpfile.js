@@ -23,7 +23,38 @@ var paths = {
           './src/app/**/*.js',
           '!./src/app/**/*.spec.js']
 };
-
+var appJs = ['src/app/app.module.js',
+              'src/app/core/core.module.js',
+              'src/app/layout/layout.module.js',
+              'src/app/widgets/widgets.module.js',
+              'src/app/blocks/detection/detection.module.js',
+              'src/app/blocks/interceptor/interceptor.module.js',
+              'src/app/blocks/exception/exception.module.js',
+              'src/app/blocks/logger/logger.module.js',
+              'src/app/blocks/router/router.module.js',
+              // 'src/app/modules/admin/admin.module.js',
+              // 'src/app/modules/feeds/feeds.module.js',
+              // 'src/app/modules/home/home.module.js',
+              'src/app/blocks/detection/detect-device.provider.js',
+              'src/app/blocks/interceptor/httpInterceptor.factory.js',
+              'src/app/blocks/exception/exception-handler.provider.js',
+              'src/app/blocks/exception/exception.js',
+              'src/app/blocks/logger/logger.js',
+              'src/app/blocks/router/router-helper.provider.js',
+              'src/app/core/core.route.js',
+              'src/app/core/config.js',
+              'src/app/core/constants.js',
+              'src/app/core/core.detection.js',
+              // 'src/app/core/dataservice.js',
+              'src/app/layout/shell.controller.js',
+              'src/app/layout/sidebar.controller.js',
+              // 'src/app/widgets/chatbox.directive.js',
+              // 'src/app/widgets/ht-img-person.directive.js',
+              // 'src/app/widgets/ht-widget-header.directive.js',
+              // 'src/app/modules/admin/admin.route.js',
+              // 'src/app/modules/feeds/feeds.route.js',
+              // 'src/app/modules/home/home.route.js'
+              ];
 
 //-----------CLEAN--------------------
 gulp.task('clean:js', function() {
@@ -71,15 +102,15 @@ gulp.task('concat', ['clean', 'concat:js']);
 //-----------MIN--------------------
 gulp.task('min:js:app', function(){
   //min app
-  return gulp.src(paths.appJs)
-    //.pipe(sourcemaps.init())
+  return gulp.src(appJs)
+    .pipe(sourcemaps.init())
     .pipe(using())
     .pipe(jshint())
     .pipe(jshint.reporter('default'))
     .pipe(concat({path: 'app.min.js', cwd: ''}))                     // Make a single file 
     .pipe(uglify())                                 // Make the file titchy tiny small
     .pipe(rev())                                    // Suffix a version number to it
-    //.pipe(sourcemaps.write('.'))
+    .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest(paths.webroot +'dist/js/'))    // Write single versioned file to build/release folder
     .on('error', gutil.log);
 });
