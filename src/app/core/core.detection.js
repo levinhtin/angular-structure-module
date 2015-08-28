@@ -6,6 +6,7 @@
     .run(appRun);
 
   /* @ngInject */
+  appRun.$inject = ['$detectionDevice'];
   function appRun($detectionDevice) {
     console.log($detectionDevice.isMobile());
     // if($detectionDevice.isMobile != null){

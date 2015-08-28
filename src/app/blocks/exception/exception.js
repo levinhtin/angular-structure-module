@@ -7,6 +7,7 @@
 
     /* @ngInject */
     exception.$inject = ['$q', 'logger'];
+    
     function exception($q, logger) {
         var service = {
             catcher: catcher

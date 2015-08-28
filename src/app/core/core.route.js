@@ -6,6 +6,7 @@
         .run(appRun);
 
     /* @ngInject */
+    appRun.$inject = ['routerHelper'];
     function appRun(routerHelper) {
         routerHelper.configureWhen('', '/');
         var otherwise = '/404';
