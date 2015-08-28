@@ -34,18 +34,19 @@ var appJs = ['src/app/app.module.js',
               'src/app/blocks/router/router.module.js',
               // 'src/app/modules/admin/admin.module.js',
               // 'src/app/modules/feeds/feeds.module.js',
-              // 'src/app/modules/home/home.module.js',
+              'src/app/modules/home/home.module.js',
               'src/app/blocks/detection/detect-device.provider.js',
               'src/app/blocks/interceptor/httpInterceptor.factory.js',
               'src/app/blocks/exception/exception-handler.provider.js',
               'src/app/blocks/exception/exception.js',
               'src/app/blocks/logger/logger.js',
               'src/app/blocks/router/router-helper.provider.js',
+              'src/app/core/dataservice.js',
               'src/app/core/core.route.js',
+              
               'src/app/core/config.js',
               'src/app/core/constants.js',
               'src/app/core/core.detection.js',
-              // 'src/app/core/dataservice.js',
               'src/app/layout/shell.controller.js',
               'src/app/layout/sidebar.controller.js',
               // 'src/app/widgets/chatbox.directive.js',
@@ -53,7 +54,7 @@ var appJs = ['src/app/app.module.js',
               // 'src/app/widgets/ht-widget-header.directive.js',
               // 'src/app/modules/admin/admin.route.js',
               // 'src/app/modules/feeds/feeds.route.js',
-              // 'src/app/modules/home/home.route.js'
+              'src/app/modules/home/home.route.js'
               ];
 
 //-----------CLEAN--------------------
