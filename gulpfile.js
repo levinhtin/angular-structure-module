@@ -5,6 +5,7 @@ var gulp = require('gulp'),
   // rimraf = require("rimraf"),
   concat = require("gulp-concat"),
   cssmin = require("gulp-cssmin"),
+  minifyCss = require('gulp-minify-css'),
   uglify = require("gulp-uglify");
   mainBowerFiles = require('gulp-main-bower-files'),
   sourcemaps = require('gulp-sourcemaps'),
@@ -23,41 +24,46 @@ var paths = {
           './src/app/blocks/**/*.js',
           './src/app/**/*.js',
           '!./src/app/**/*.spec.js',
-          '!./src/app/modules/*.controller.js']
+          '!./src/app/modules/*.controller.js'],
+  vendorCss: ['bower_components/bootstrap/dist/css/bootstrap.css',
+              'bower_components/font-awesome/css/font-awesome.css',
+              'bower_components/toastr/toastr.css'],
+  vendorFont: ['bower_components/font-awesome/fonts/*',
+               'bower_components/bootstrap/dist/fonts/*']
 };
-var appJs = ['src/app/app.module.js',
-              'src/app/core/core.module.js',
-              'src/app/layout/layout.module.js',
-              'src/app/widgets/widgets.module.js',
-              'src/app/blocks/detection/detection.module.js',
-              'src/app/blocks/interceptor/interceptor.module.js',
-              'src/app/blocks/exception/exception.module.js',
-              'src/app/blocks/logger/logger.module.js',
-              'src/app/blocks/router/router.module.js',
-              'src/app/modules/admin/admin.module.js',
-              'src/app/modules/feeds/feeds.module.js',
-              'src/app/modules/home/home.module.js',
-              'src/app/blocks/detection/detect-device.provider.js',
-              'src/app/blocks/interceptor/httpInterceptor.factory.js',
-              'src/app/blocks/exception/exception-handler.provider.js',
-              'src/app/blocks/exception/exception.js',
-              'src/app/blocks/logger/logger.js',
-              'src/app/blocks/router/router-helper.provider.js',
-              'src/app/core/dataservice.js',
-              'src/app/core/core.route.js',
+// var appJs = ['src/app/app.module.js',
+//               'src/app/core/core.module.js',
+//               'src/app/layout/layout.module.js',
+//               'src/app/widgets/widgets.module.js',
+//               'src/app/blocks/detection/detection.module.js',
+//               'src/app/blocks/interceptor/interceptor.module.js',
+//               'src/app/blocks/exception/exception.module.js',
+//               'src/app/blocks/logger/logger.module.js',
+//               'src/app/blocks/router/router.module.js',
+//               'src/app/modules/admin/admin.module.js',
+//               'src/app/modules/feeds/feeds.module.js',
+//               'src/app/modules/home/home.module.js',
+//               'src/app/blocks/detection/detect-device.provider.js',
+//               'src/app/blocks/interceptor/httpInterceptor.factory.js',
+//               'src/app/blocks/exception/exception-handler.provider.js',
+//               'src/app/blocks/exception/exception.js',
+//               'src/app/blocks/logger/logger.js',
+//               'src/app/blocks/router/router-helper.provider.js',
+//               'src/app/core/dataservice.js',
+//               'src/app/core/core.route.js',
               
-              'src/app/core/config.js',
-              'src/app/core/constants.js',
-              'src/app/core/core.detection.js',
-              'src/app/layout/shell.controller.js',
-              'src/app/layout/sidebar.controller.js',
-              // 'src/app/widgets/chatbox.directive.js',
-              // 'src/app/widgets/ht-img-person.directive.js',
-              // 'src/app/widgets/ht-widget-header.directive.js',
-              'src/app/modules/admin/admin.route.js',
-              'src/app/modules/feeds/feeds.route.js',
-              'src/app/modules/home/home.route.js'
-              ];
+//               'src/app/core/config.js',
+//               'src/app/core/constants.js',
+//               'src/app/core/core.detection.js',
+//               'src/app/layout/shell.controller.js',
+//               'src/app/layout/sidebar.controller.js',
+//               // 'src/app/widgets/chatbox.directive.js',
+//               // 'src/app/widgets/ht-img-person.directive.js',
+//               // 'src/app/widgets/ht-widget-header.directive.js',
+//               'src/app/modules/admin/admin.route.js',
+//               'src/app/modules/feeds/feeds.route.js',
+//               'src/app/modules/home/home.route.js'
+//               ];
 
 //-----------CLEAN--------------------
 gulp.task('clean:js', function() {
@@ -66,7 +72,13 @@ gulp.task('clean:js', function() {
   return gulp.src([paths.webroot + 'dist/js/*.js', paths.webroot + 'dist/js/*.map'])
           .pipe(clean());
 });
-gulp.task('clean', ['clean:js']);
+gulp.task('clean:css', function() {
+  // del([paths.webroot + 'dist/js/*.js'],cb);
+  // del([paths.webroot + 'dist/'],cb);
+  return gulp.src([paths.webroot + 'dist/css/**'])
+          .pipe(clean());
+});
+gulp.task('clean', ['clean:js', 'clean:css']);
 
 //-----------JSHINT-----------------
 gulp.task('jshint:app', function(){
@@ -132,8 +144,21 @@ gulp.task('min:js:vendor', function(){
 });
 
 gulp.task('min:js', ['clean:js', 'min:js:vendor', 'min:js:app']);
+//--------------------------------------------------------------
+gulp.task('min:css:vendor', function(){
+  return gulp.src(paths.vendorCss)
+    .pipe(using())
+    .pipe(concat({path: 'vendor.min.css', cwd: ''}))                     // Make a single file 
+    .pipe(minifyCss())                                 // Make the file titchy tiny small
+    .pipe(rev())                                    // Suffix a version number to it
+    .pipe(gulp.dest(paths.webroot +'dist/css/'))   // Write single versioned file to build/release folder
+    .on('error', gutil.log); 
+});
+gulp.task('min:css', ['clean:css', 'min:css:vendor']);
+gulp.task('min', ['min:js', 'min:css']);
 
-gulp.task('min', ['min:js']);
+//--------------------------------------------------------------
+
 
 //----------------HTML---------------------------
 gulp.task('html:dev', function () {
@@ -158,8 +183,9 @@ gulp.task('html:debug', ['concat'], function () {
 gulp.task('html:release', ['min'], function () {
     return gulp.src(paths.webroot + 'src/index.html')
     .pipe(using())
-    .pipe(inject(gulp.src(paths.webroot +'dist/**/app*.min.js', {read: false}), {starttag: '<!-- inject:app:{{ext}} -->'}))
-    .pipe(inject(gulp.src(paths.webroot +'dist/**/vendor*.min.js', {read: false}), {starttag: '<!-- inject:vendor:{{ext}} -->'}))
+    .pipe(inject(gulp.src(paths.webroot +'dist/js/app*.min.js', {read: false}), {starttag: '<!-- inject:app:{{ext}} -->'}))
+    .pipe(inject(gulp.src(paths.webroot +'dist/js/vendor*.min.js', {read: false}), {starttag: '<!-- inject:vendor:{{ext}} -->'}))
+    .pipe(inject(gulp.src(paths.webroot +'dist/css/vendor*.min.css', {read: false}), {starttag: '<!-- inject:vendor:{{ext}} -->'}))
     .pipe(gulp.dest(paths.webroot));  
 });
 //-----------------SERVER-----------------------------------
