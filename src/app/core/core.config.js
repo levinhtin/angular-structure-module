@@ -1,0 +1,51 @@
+(function () {
+    'use strict';
+
+    var core = angular.module('app.core');
+
+    core.config(interceptorConfig);
+    interceptorConfig.$inject = ['$httpProvider']; 
+    function interceptorConfig($httpProvider) {
+      $httpProvider.interceptors.push('ylHttpInterceptor');
+    }
+
+    core.config(toastrConfig);
+
+    toastrConfig.$inject = ['toastr'];
+    /* @ngInject */
+    function toastrConfig(toastr) {
+        toastr.options.timeOut = 4000;
+        toastr.options.positionClass = 'toast-bottom-right';
+    }
+
+    var config = {
+        appErrorPrefix: '[helloWorld Error] ',
+        appTitle: 'Youlook'
+    };
+
+    core.value('config', config);
+
+    core.config(configure);
+
+    configure.$inject = ['$locationProvider', '$logProvider', 'routerHelperProvider', 'exceptionHandlerProvider', '$translateProvider'];
+    /* @ngInject */
+    function configure($locationProvider, $logProvider, routerHelperProvider, exceptionHandlerProvider, $translateProvider) {
+      if ($logProvider.debugEnabled) {
+          $logProvider.debugEnabled(true);
+      }
+      exceptionHandlerProvider.configure(config.appErrorPrefix);
+      routerHelperProvider.configure({docTitle: config.appTitle + ' | '});
+
+      //---Translate
+      $translateProvider.useLoader('customTranslateLoader', { 
+        prefix: 'data/langs/',
+        suffix: '.json' 
+      });
+      /* location and route configuration stuff... */
+      $translateProvider.preferredLanguage('vi');
+      // $translateProvider.useCookieStorage();
+      $translateProvider.useLocalStorage();
+      // Enable escaping of HTML
+      $translateProvider.useSanitizeValueStrategy('escaped');
+    }
+})();
