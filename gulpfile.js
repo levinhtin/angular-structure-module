@@ -168,6 +168,7 @@ gulp.task('html:dev', function () {
     .pipe(using())
     .pipe(inject(gulp.src(paths.appJs, {read: false}), {starttag: '<!-- inject:app:{{ext}} -->'}))
     .pipe(inject(gulp.src('./bower.json', {read:true}).pipe(mainBowerFiles()), {relative: true, starttag: '<!-- inject:vendor:{{ext}} -->'}))
+    .pipe(inject(gulp.src(paths.vendorCss, {read: false}), {starttag: '<!-- inject:vendor:{{ext}} -->'}))
     .pipe(gulp.dest(paths.webroot)); 
     
 });
@@ -177,6 +178,7 @@ gulp.task('html:debug', ['concat'], function () {
     .pipe(using())
     .pipe(inject(gulp.src(paths.webroot +'dist/**/app*.min.js', {read: false}), {starttag: '<!-- inject:app:{{ext}} -->'}))
     .pipe(inject(gulp.src(paths.webroot +'dist/**/vendor*.min.js', {read: false}), {starttag: '<!-- inject:vendor:{{ext}} -->'}))
+    .pipe(inject(gulp.src(paths.vendorCss, {read: false}), {starttag: '<!-- inject:vendor:{{ext}} -->'}))
     .pipe(gulp.dest(paths.webroot));  
 });
 

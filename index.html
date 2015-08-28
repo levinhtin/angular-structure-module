@@ -16,7 +16,9 @@
     <link rel="stylesheet" href="/bower_components/toastr/toastr.css" /> -->
 
     <!-- inject:vendor:css -->
-    <link rel="stylesheet" href="../bower_components/toastr/toastr.css">
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="/bower_components/toastr/toastr.css">
     <!-- endinject -->
 
     <link rel="stylesheet" type="text/css" href="http://getbootstrap.com/examples/starter-template/starter-template.css">    
@@ -46,9 +48,9 @@
     <script src="../bower_components/moment/moment.js"></script>
     <script src="../bower_components/oclazyload/dist/ocLazyLoad.js"></script>
     <script src="../bower_components/toastr/toastr.js"></script>
-    <script src="bower_components/angular-translate-storage-cookie/angular-translate-storage-cookie.js"></script>
-    <script src="bower_components/angular-translate-storage-local/angular-translate-storage-local.min.js"></script>
+    <script src="../bower_components/angular-translate-storage-cookie/angular-translate-storage-cookie.js"></script>
     <script src="../bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="../bower_components/angular-translate-storage-local/angular-translate-storage-local.js"></script>
     <!-- endinject -->
 
     <!-- inject:app:js -->
@@ -56,6 +58,7 @@
     <script src="/src/app/core/core.module.js"></script>
     <script src="/src/app/layout/layout.module.js"></script>
     <script src="/src/app/widgets/widgets.module.js"></script>
+    <script src="/src/app/blocks/authentication/authentication.module.js"></script>
     <script src="/src/app/blocks/detection/detection.module.js"></script>
     <script src="/src/app/blocks/exception/exception.module.js"></script>
     <script src="/src/app/blocks/interceptor/interceptor.module.js"></script>
@@ -65,6 +68,8 @@
     <script src="/src/app/modules/admin/admin.module.js"></script>
     <script src="/src/app/modules/feeds/feeds.module.js"></script>
     <script src="/src/app/modules/home/home.module.js"></script>
+    <script src="/src/app/blocks/authentication/auth-help.service.js"></script>
+    <script src="/src/app/blocks/authentication/auth-helper.provider.js"></script>
     <script src="/src/app/blocks/detection/detect-device.provider.js"></script>
     <script src="/src/app/blocks/exception/exception-handler.provider.js"></script>
     <script src="/src/app/blocks/exception/exception.js"></script>
@@ -74,8 +79,7 @@
     <script src="/src/app/blocks/translate/translateLoader.factory.js"></script>
     <script src="/src/app/core/core.config.js"></script>
     <script src="/src/app/core/core.constants.js"></script>
-    <script src="/src/app/core/core.run.detection.js"></script>
-    <script src="/src/app/core/core.run.route.js"></script>
+    <script src="/src/app/core/core.run.js"></script>
     <script src="/src/app/core/dataservice.js"></script>
     <script src="/src/app/layout/shell.controller.js"></script>
     <script src="/src/app/layout/sidebar.controller.js"></script>
