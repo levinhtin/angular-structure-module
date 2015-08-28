@@ -4,6 +4,7 @@
     var core = angular.module('app.core');
 
     core.config(interceptorConfig);
+    /* @ngInject */
     interceptorConfig.$inject = ['$httpProvider']; 
     function interceptorConfig($httpProvider) {
       $httpProvider.interceptors.push('ylHttpInterceptor');
@@ -27,8 +28,8 @@
 
     core.config(configure);
 
-    configure.$inject = ['$locationProvider', '$logProvider', 'routerHelperProvider', 'exceptionHandlerProvider'];
     /* @ngInject */
+    configure.$inject = ['$locationProvider', '$logProvider', 'routerHelperProvider', 'exceptionHandlerProvider'];
     function configure($locationProvider, $logProvider, routerHelperProvider, exceptionHandlerProvider) {
         if ($logProvider.debugEnabled) {
             $logProvider.debugEnabled(true);
