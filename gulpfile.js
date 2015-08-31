@@ -24,7 +24,7 @@ var paths = {
           './src/app/blocks/**/*.js',
           './src/app/**/*.js',
           '!./src/app/**/*.spec.js',
-          '!./src/app/modules/*.controller.js'],
+          '!./src/app/modules/**/*.controller.js'],
   vendorCss: ['bower_components/bootstrap/dist/css/bootstrap.css',
               'bower_components/font-awesome/css/font-awesome.css',
               'bower_components/toastr/toastr.css'],

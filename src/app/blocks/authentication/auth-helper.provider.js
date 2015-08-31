@@ -10,24 +10,23 @@
     /* @ngInject */
     function authHelperProvider() {
 
-        this.configure = function(cfg) {
-            angular.extend(config, cfg);
-        };
+        // this.configure = function(cfg) {
+        //     angular.extend(config, cfg);
+        // };
 
         this.$get = AuthHelper;
         AuthHelper.$inject = ['$cookies', '$cookieStore'];
         /* @ngInject */
         function AuthHelper($cookies, $cookieStore) {
-            
             return {
-                authenticated: authenticated,
-                setLogin: setLogin,
-                getUserInfo: getUserInfo,
-                setUserInfo: setUserInfo,
-                updateUserInfo: updateUserInfo,
-                setToken: setToken,
-                getToken: getToken,
-                logout: logout
+              authenticated: authenticated,
+              setLogin: setLogin,
+              getUserInfo: getUserInfo,
+              setUserInfo: setUserInfo,
+              updateUserInfo: updateUserInfo,
+              setToken: setToken,
+              getToken: getToken,
+              logout: logout
             };
 
             function authenticated(){

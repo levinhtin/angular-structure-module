@@ -1,15 +1,14 @@
-;(function() {
+(function() {
   'use strict';
   
   angular
-    .module('blocks.authentication')
-    .service('authService', authService);
+    .module('app.module.user')
+    .service('userService', userService);
 
-    authService.$inject = ['$rootScope', '$http', '$cookies', '$cookieStore', 'serverConfig'];
+    userService.$inject = ['$rootScope', '$http', '$cookies', '$cookieStore', 'serverConfig'];
 
-    function authService($rootScope, $http, $cookies, $cookieStore, serverConfig){
+    function userService($rootScope, $http, $cookies, $cookieStore, serverConfig){
       this.login = function(urlString, params){
-        console.log(serverConfig);
         var request = {
           method: 'POST',
           url: serverConfig.hostApi + urlString,

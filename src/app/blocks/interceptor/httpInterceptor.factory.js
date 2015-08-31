@@ -10,6 +10,9 @@
 		    request: function(config) {
 		      // alert('Request intercepted.');
 		      config.headers = config.headers || {};
+		      config.headers['Content-Type'] = 'application/json';
+        	config.headers['Accept'] = 'application/json';
+        	// config.headers['Access-Control-Allow-Origin'] = '*';
 
           if ($cookies.get('access-token')) {
               config.headers['Access-Token'] = $cookies.get('access-token');

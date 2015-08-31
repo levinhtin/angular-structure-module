@@ -7,7 +7,8 @@
         'app.layout',
         'app.module.admin',
         'app.module.feeds',
-        'app.module.home'
+        'app.module.home',
+        'app.module.user'
     ]);
 
 })();

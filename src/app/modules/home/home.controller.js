@@ -5,9 +5,9 @@
         .module('app.module.home')
         .controller('HomeController', HomeController);
 
-    HomeController.$inject = ['$q', 'logger', 'dataservice', 'authService'];
+    HomeController.$inject = ['$q', 'logger', 'dataservice'];
     /* @ngInject */
-    function HomeController($q, logger, dataservice, authService) {
+    function HomeController($q, logger, dataservice) {
         var vm = this;
         vm.news = {
             title: 'helloWorld',
@@ -18,7 +18,6 @@
         vm.title = 'Dashboard';
 
         activate();
-        authService.login('auth/login', {'username': 'tinlvv@greenglobal.vn', 'password': '123123'});
 
         function activate() {
             // var promises = [getMessageCount(), getPeople()];
