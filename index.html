@@ -25,6 +25,7 @@
 </head>
 <body>
     <div ng-include="'src/app/layout/shell.html'"></div>
+    isMobile: {{isMobile}}
     <!-- <div id="splash-page" ng-show="showSplash">
         <div class="page-splash">
             <div class="page-splash-message">
@@ -58,9 +59,9 @@
     <script src="/src/app/core/core.module.js"></script>
     <script src="/src/app/layout/layout.module.js"></script>
     <script src="/src/app/widgets/widgets.module.js"></script>
+    <script src="/src/app/blocks/exception/exception.module.js"></script>
     <script src="/src/app/blocks/authentication/authentication.module.js"></script>
     <script src="/src/app/blocks/detection/detection.module.js"></script>
-    <script src="/src/app/blocks/exception/exception.module.js"></script>
     <script src="/src/app/blocks/interceptor/interceptor.module.js"></script>
     <script src="/src/app/blocks/logger/logger.module.js"></script>
     <script src="/src/app/blocks/router/router.module.js"></script>
@@ -68,11 +69,12 @@
     <script src="/src/app/modules/admin/admin.module.js"></script>
     <script src="/src/app/modules/feeds/feeds.module.js"></script>
     <script src="/src/app/modules/home/home.module.js"></script>
-    <script src="/src/app/blocks/authentication/auth-help.service.js"></script>
-    <script src="/src/app/blocks/authentication/auth-helper.provider.js"></script>
-    <script src="/src/app/blocks/detection/detect-device.provider.js"></script>
     <script src="/src/app/blocks/exception/exception-handler.provider.js"></script>
     <script src="/src/app/blocks/exception/exception.js"></script>
+    <script src="/src/app/blocks/authentication/auth-help.service.js"></script>
+    <script src="/src/app/blocks/authentication/auth-helper.provider.js"></script>
+    <script src="/src/app/blocks/detection/detect-config.provider.js"></script>
+    <script src="/src/app/blocks/detection/detect-device.provider.js"></script>
     <script src="/src/app/blocks/interceptor/httpInterceptor.factory.js"></script>
     <script src="/src/app/blocks/logger/logger.js"></script>
     <script src="/src/app/blocks/router/router-helper.provider.js"></script>
@@ -80,6 +82,7 @@
     <script src="/src/app/core/core.config.js"></script>
     <script src="/src/app/core/core.constants.js"></script>
     <script src="/src/app/core/core.run.js"></script>
+    <script src="/src/app/core/core.server.js"></script>
     <script src="/src/app/core/dataservice.js"></script>
     <script src="/src/app/layout/shell.controller.js"></script>
     <script src="/src/app/layout/sidebar.controller.js"></script>

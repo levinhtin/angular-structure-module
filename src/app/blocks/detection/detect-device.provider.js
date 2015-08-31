@@ -18,7 +18,7 @@ var adaptive = angular.module('blocks.detection');
  * The `$detectionProvider` provides an interface to configure `$detection service for
  * runtime.
  */
-adaptive.provider('$detectionDevice', [function() {
+adaptive.provider('detectDevice', [function() {
   var apple_phone         = /iPhone/i,
       apple_ipod          = /iPod/i,
       apple_tablet        = /iPad/i,

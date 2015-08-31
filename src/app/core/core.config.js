@@ -11,19 +11,28 @@
 
     core.config(toastrConfig);
 
-    toastrConfig.$inject = ['toastr'];
     /* @ngInject */
+    toastrConfig.$inject = ['toastr'];
     function toastrConfig(toastr) {
         toastr.options.timeOut = 4000;
         toastr.options.positionClass = 'toast-bottom-right';
+    }
+
+    /*@DetectConfigHelper*/
+    // core.constant('configApi', {});
+    getConfigApi.$inject = ['detectConfigHelper'];
+    function getConfigApi(){
+      var configApi = detectConfigHelper.current();
+      core.constant('configApi', configApi);
     }
 
     var config = {
         appErrorPrefix: '[helloWorld Error] ',
         appTitle: 'Youlook'
     };
-
     core.value('config', config);
+
+
 
     core.config(configure);
 

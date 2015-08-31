@@ -5,13 +5,14 @@
     .module('blocks.authentication')
     .service('authService', authService);
 
-    authService.$inject = ['$rootScope', '$http', '$cookies', '$cookieStore'];
+    authService.$inject = ['$rootScope', '$http', '$cookies', '$cookieStore', 'serverConfig'];
 
-    function authService($rootScope, $http, $cookies, $cookieStore){
+    function authService($rootScope, $http, $cookies, $cookieStore, serverConfig){
       this.login = function(urlString, params){
+        console.log(serverConfig);
         var request = {
           method: 'POST',
-          url: urlString,
+          url: serverConfig.hostApi + urlString,
         };
         if(params){
           request.data = $.param(params);

@@ -195,8 +195,8 @@ gulp.task('connect', function() {
   connect.server({
     root: '.',
     livereload: true,
-    port: 8080,
-    host: 'fe.youlook.net'
+    port: 80,
+    host: 'vnlocal.youlook.net'
   });
 });
 //-----------------RUN--------------------------------

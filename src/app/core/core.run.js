@@ -6,11 +6,11 @@
     .run(appRun);
 
   /* @ngInject */
-  appRun.$inject = ['$detectionDevice', 'routerHelper', 'authHelper'];
-  function appRun($detectionDevice, routerHelper, authHelper) {
+  appRun.$inject = ['$rootScope', 'detectDevice', 'routerHelper', 'authHelper'];
+  function appRun($rootScope, detectDevice, routerHelper, authHelper) {
     /*@Detect Device*/
-    console.log('isMobile: ' + $detectionDevice.isMobile());
-
+    console.log('isMobile: ' + detectDevice.isMobile());
+    $rootScope.isMobile = detectDevice.isMobile();
     /*@Route*/
     routerHelper.configureWhen('', '/');
     var otherwise = '/404';

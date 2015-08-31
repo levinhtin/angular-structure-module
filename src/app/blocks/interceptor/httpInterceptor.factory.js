@@ -3,17 +3,17 @@
     angular.module('blocks.interceptor')
     .factory('ylHttpInterceptor', httpInterceptor);
 
-    httpInterceptor.$inject = ['$q'];
+    httpInterceptor.$inject = ['$q', '$cookies'];
 
-		function httpInterceptor($q) {
+		function httpInterceptor($q, $cookies) {
 		  return {
 		    request: function(config) {
 		      // alert('Request intercepted.');
 		      config.headers = config.headers || {};
 
-          // if ($localStorage.token) {
-          //     config.headers.Authorization = 'Bearer ' + $localStorage.token;
-          // }
+          if ($cookies.get('access-token')) {
+              config.headers['Access-Token'] = $cookies.get('access-token');
+          }
 		      return config || $q.when(config);
 		    }, 
 		    requestError: function(config) {
