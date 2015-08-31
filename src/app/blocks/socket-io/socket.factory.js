@@ -6,13 +6,13 @@
         .module('blocks.socket')
         .factory('socketService', socketService);
 
-    socketService.$inject = [];
+    socketService.$inject = ['$rootScope'];
     /* @ngInject */
-    function socketService() {
+    function socketService($rootScope) {
       var socket = io.connect('http://localhost:3000');
       return {
         on: on,
-        emit: emitMessage
+        emit: emit
       };
 
       function on(eventName, callback) {
@@ -24,7 +24,7 @@
         });
       }
 
-      function emitMessage(eventName, data, callback) {
+      function emit(eventName, data, callback) {
         socket.emit(eventName, data, function () {
           var args = arguments;
           $rootScope.$apply(function () {

@@ -5,4 +5,14 @@
   <hr/>
   Translate: {{'Date'|translate}}
   <div class="youlook-chatbox"></div>
+
+  <div>
+  	<ul>
+  		<li ng-repeat="message in messages">
+  			<p>{{message}}</p>
+  		</li>
+  	</ul>
+  	<input type="text" ng-model="vm.message">
+  	<button type="button" ng-click="vm.sendMessage()">Send</button>
+  </div>
 </div>

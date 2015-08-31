@@ -10,6 +10,8 @@
     function HomeController($q, logger, dataservice, socketService) {
         
         var vm = this;
+        vm.messages = [];
+        vm.message = '';
         socketService.on('init', function (data) {
           vm.name = data.name;
           vm.users = data.users;
@@ -45,7 +47,59 @@
             }
           }
         });
-        
+
+        // Private helpers
+        // ===============
+        var changeName = function (oldName, newName) {
+          // rename user in list of users
+          var i;
+          for (i = 0; i < vm.users.length; i++) {
+            if (vm.users[i] === oldName) {
+              vm.users[i] = newName;
+            }
+          }
+
+          vm.messages.push({
+            user: 'chatroom',
+            text: 'User ' + oldName + ' is now known as ' + newName + '.'
+          });
+        }
+
+        // Methods published to the scope
+        // ==============================
+
+        vm.changeName = function () {
+          socketService.emit('change:name', {
+            name: vm.newName
+          }, function (result) {
+            if (!result) {
+              alert('There was an error changing your name');
+            } else {
+
+              changeName(vm.name, vm.newName);
+
+              vm.name = vm.newName;
+              vm.newName = '';
+            }
+          });
+        };
+
+        vm.sendMessage = function () {
+          socketService.emit('send:message', {
+            message: vm.message
+          });
+
+          // add the message to our model locally
+          vm.messages.push({
+            user: vm.name,
+            text: vm.message
+          });
+
+          // clear message box
+          vm.message = '';
+        };
+        //------------------------------------------
+
         vm.news = {
             title: 'helloWorld',
             description: 'Hot Towel Angular is a SPA template for Angular developers.'
