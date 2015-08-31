@@ -15,15 +15,15 @@
           vm.users = data.users;
         });
 
-        socket.on('send:message', function (message) {
+        socketService.on('send:message', function (message) {
           vm.messages.push(message);
         });
 
-        socket.on('change:name', function (data) {
+        socketService.on('change:name', function (data) {
           changeName(data.oldName, data.newName);
         });
 
-        socket.on('user:join', function (data) {
+        socketService.on('user:join', function (data) {
           vm.messages.push({
             user: 'chatroom',
             text: 'User ' + data.name + ' has joined.'
@@ -31,7 +31,7 @@
           vm.users.push(data.name);
         });
 
-        socket.on('user:left', function (data) {
+        socketService.on('user:left', function (data) {
           vm.messages.push({
             user: 'chatroom',
             text: 'User ' + data.name + ' has left.'
