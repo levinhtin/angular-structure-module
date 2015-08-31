@@ -3,7 +3,7 @@
   angular
       .module('app.core', [
           'ngAnimate', 'ngSanitize', 'oc.lazyLoad', 'ngCookies',
-          'blocks.translate', 'blocks.detection', 'blocks.interceptor', 'blocks.authentication', 'blocks.exception', 'blocks.logger', 'blocks.router',
+          'blocks.translate', 'blocks.detection', 'blocks.interceptor', 'blocks.authentication', 'blocks.exception', 'blocks.logger', 'blocks.router', 'blocks.socket',
           'ui.router', 'ngplus'
       ]);
 })();
