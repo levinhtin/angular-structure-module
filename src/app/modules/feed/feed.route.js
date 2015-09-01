@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app.module.feeds')
+        .module('app.module.feed')
         .run(appRun);
 
     appRun.$inject = ['routerHelper'];
@@ -14,22 +14,22 @@
     function getStates() {
         return [
             {
-                state: 'feeds',
+                state: 'feed',
                 config: {
-                    url: '/feeds',
-                    templateUrl: 'src/app/modules/feeds/feeds.html',
-                    controller: 'FeedsController',
+                    url: '/feed',
+                    templateUrl: 'src/app/modules/feed/feed.html',
+                    controller: 'FeedController',
                     controllerAs: 'vm',
                     resolve: { // Any property in resolve should return a promise and is executed before the view is loaded
                         loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
                             // you can lazy load files for an existing module
-                            return $ocLazyLoad.load('/src/app/modules/feeds/feeds.controller.js');
+                            return $ocLazyLoad.load('/src/app/modules/feed/feed.controller.js');
                         }]
                     },
-                    title: 'Feeds',
+                    title: 'Feed',
                     settings: {
                         nav: 1,
-                        content: '<i class="fa fa-dashboard"></i> Feeds'
+                        content: '<i class="fa fa-dashboard"></i> Feed'
                     }
                 }
             }

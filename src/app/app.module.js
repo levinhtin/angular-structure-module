@@ -6,7 +6,7 @@
         'app.widgets',
         'app.layout',
         'app.module.admin',
-        'app.module.feeds',
+        'app.module.feed',
         'app.module.home',
         'app.module.user'
     ]);

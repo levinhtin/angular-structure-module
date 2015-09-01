@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 
-    angular.module('app.module.feeds', [
+    angular.module('app.module.feed', [
         'app.core',
         'app.widgets'
       ]);
