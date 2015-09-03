@@ -5,6 +5,7 @@
         'app.core',
         'app.widgets',
         'app.layout',
+        'app.components',
         'app.module.admin',
         'app.module.feed',
         'app.module.home',

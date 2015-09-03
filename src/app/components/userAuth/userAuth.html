@@ -1,0 +1,12 @@
+<div ng-controller="UserAuthController as userAuth">
+	<ul class="nav navbar-nav">
+	  <li class="active"><a ui-sref="user.profile({userId: userAuth.userInfo.id})">My Profile</a></li>
+	  <li>
+	  	<a href="#about">Menu</a>
+	  	<ul>
+	  		<li><a href="javascript:void(0)" ng-click="userAuth.login()">Login</a></li>
+	  		<li><a href="javascript:void(0)" ng-click="userAuth.logout()">Logout</a></li>
+	  	</ul>
+  	</li>
+	</ul>
+</div>

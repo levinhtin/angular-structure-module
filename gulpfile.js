@@ -25,9 +25,12 @@ var paths = {
           './src/app/**/*.js',
           '!./src/app/**/*.spec.js',
           '!./src/app/modules/**/*.controller.js'],
+  appCss: ['src/styles/styles.css'],
   vendorCss: ['bower_components/bootstrap/dist/css/bootstrap.css',
               'bower_components/font-awesome/css/font-awesome.css',
-              'bower_components/toastr/toastr.css'],
+              'bower_components/toastr/toastr.css',
+              'bower_components/ngDialog/css/ngDialog.css',
+              'bower_components/ngDialog/css/ngDialog-theme-default.css'],
   vendorFont: ['bower_components/font-awesome/fonts/*',
                'bower_components/bootstrap/dist/fonts/*']
 };
@@ -168,6 +171,7 @@ gulp.task('html:dev', function () {
     .pipe(using())
     .pipe(inject(gulp.src(paths.appJs, {read: false}), {starttag: '<!-- inject:app:{{ext}} -->'}))
     .pipe(inject(gulp.src('./bower.json', {read:true}).pipe(mainBowerFiles()), {relative: true, starttag: '<!-- inject:vendor:{{ext}} -->'}))
+    .pipe(inject(gulp.src(paths.appCss, {read: false}), {starttag: '<!-- inject:app:{{ext}} -->'}))
     .pipe(inject(gulp.src(paths.vendorCss, {read: false}), {starttag: '<!-- inject:vendor:{{ext}} -->'}))
     .pipe(gulp.dest(paths.webroot)); 
     

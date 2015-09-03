@@ -1,0 +1,25 @@
+<div class="popup-container">
+	<div class="content" ng-init="getSocialPageList()">
+		<div class="popup-header">
+			<h4 class="title">Sign In</h4>
+		</div>
+		<div class="popup-content">
+			<form name="loginForm" role="form" ng-submit="userPopSignIn.submit(loginForm.$valid)" class="ladda-fix-visible sign-in" autocomplete="false" novalidate>
+				<div class="form-group">
+					<input type="email" name="email" ng-model="userPopSignIn.viewModel.username" ng-trim="true" class="form-control" placeholder="Nhập địa chỉ email của bạn" ng-keydown="resetFormStatus()" required autocomplete="false">
+				</div>
+				<div class="form-group">
+					<input type="password" name="password" ng-model="userPopSignIn.viewModel.password" ng-trim="true" class="form-control" placeholder="Nhập mật khẩu của bạn" ng-keydown="resetFormStatus()" ng-minlength="6" required>
+
+				</div>
+				<div class="form-group clearfix">
+					<button type="submit" class="btn btn-default pull-right" data-spinner-size="30" data-style="zoom-out">
+						<span class="ladda-label">Đăng nhập</span>
+						<span class="ladda-spinner"></span>
+					</button>
+				</div>
+			</form>
+			<div class="clear"></div>
+		</div>
+	</div>
+</div>

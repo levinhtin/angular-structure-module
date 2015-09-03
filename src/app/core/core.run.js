@@ -1,13 +1,13 @@
 (function() {
   'use strict';
 
-  angular
+  var core = angular
     .module('app.core')
     .run(appRun);
 
   /* @ngInject */
-  appRun.$inject = ['$rootScope', 'detectDevice', 'routerHelper', 'authHelper'];
-  function appRun($rootScope, detectDevice, routerHelper, authHelper) {
+  appRun.$inject = ['$rootScope', 'detectDevice', 'routerHelper', 'authHelper', 'detectConfigHelper'];
+  function appRun($rootScope, detectDevice, routerHelper, authHelper, detectConfigHelper) {
     /*@Detect Device*/
     console.log('isMobile: ' + detectDevice.isMobile());
     $rootScope.isMobile = detectDevice.isMobile();
@@ -18,7 +18,8 @@
 
     /*@Authentication*/
     console.log('isAuth: ' + authHelper.authenticated());
-
+    /*@DetectConfigHelper*/
+    $rootScope.configServer = detectConfigHelper.current();
   }
 
   /*@Route using*/

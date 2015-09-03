@@ -17,10 +17,10 @@
           {
             state: 'user',
             config: {
-                url: '/user',
+                url: '/user/:userId',
                 templateUrl: 'src/app/modules/user/user.html',
                 controller: 'UserController',
-                controllerAs: 'vm',
+                controllerAs: 'user',
                 resolve: { // Any property in resolve should return a promise and is executed before the view is loaded
                     loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
                         // you can lazy load files for an existing module
@@ -35,16 +35,16 @@
             }
           },
           {
-            state: 'user.myProfile',
+            state: 'user.profile',
             config: {
-                url: '/myProfile',
+                url: '/profile',
                 templateUrl: 'src/app/modules/user/userProfile.html',
-                controller: 'UserController',
-                controllerAs: 'vm',
+                controller: 'UserProfileController',
+                controllerAs: 'profile',
                 resolve: { // Any property in resolve should return a promise and is executed before the view is loaded
                     loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
                         // you can lazy load files for an existing module
-                        return $ocLazyLoad.load('/src/app/modules/user/user.controller.js');
+                        return $ocLazyLoad.load('/src/app/modules/user/userProfile.controller.js');
                     }]
                 },
                 title: 'My Profile',
@@ -60,7 +60,7 @@
           {
             state: 'user',
             config: {
-                url: '/user',
+                url: '/user/:userId',
                 templateUrl: 'src/app/modules/user/user.adaptive.html',
                 controller: 'UserController',
                 controllerAs: 'vm',
@@ -76,7 +76,27 @@
                     content: '<i class="fa fa-dashboard"></i> User'
                 }
             }
-          }
+          },
+          {
+            state: 'user.profile',
+            config: {
+                url: '/profile',
+                templateUrl: 'src/app/modules/user/userProfile.adaptive.html',
+                controller: 'UserProfileController',
+                controllerAs: 'vm',
+                resolve: { // Any property in resolve should return a promise and is executed before the view is loaded
+                    loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+                        // you can lazy load files for an existing module
+                        return $ocLazyLoad.load('/src/app/modules/user/userProfile.controller.js');
+                    }]
+                },
+                title: 'My Profile',
+                settings: {
+                    nav: 1,
+                    content: '<i class="fa fa-dashboard"></i> Profile adaptive'
+                }
+            }
+          },
         ];
       }
     }

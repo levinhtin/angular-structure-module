@@ -1,4 +1,8 @@
 <div class="starter-template">
+	<div>
+		<img class="cover" ng-src="{{configServer.hostImg + user.userCoverPhoto.image}}" ng-style="{top: user.userCoverPhoto.cover_top}">
+		<img class="avatar" ng-src="{{configServer.hostImg + user.userInfo.avatar}}">
+	</div>
   <h1>This is user Module</h1>
   <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>
   <div ui-view></div>

@@ -27,15 +27,12 @@
     }
 
     var config = {
-        appErrorPrefix: '[helloWorld Error] ',
+        appErrorPrefix: '[Youlook Error] ',
         appTitle: 'Youlook'
     };
     core.value('config', config);
 
-
-
     core.config(configure);
-
     configure.$inject = ['$locationProvider', '$logProvider', 'routerHelperProvider', 'exceptionHandlerProvider', '$translateProvider'];
     /* @ngInject */
     function configure($locationProvider, $logProvider, routerHelperProvider, exceptionHandlerProvider, $translateProvider) {

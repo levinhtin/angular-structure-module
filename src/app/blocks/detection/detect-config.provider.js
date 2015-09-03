@@ -14,7 +14,9 @@
 
         var configs = {
             vnlocal: {
-                host: 'http://vnlocal.youlook.net/'
+              host: 'http://vnlocal.youlook.net/',
+              hostApi: 'http://api.youlook.net/',
+              hostImg: 'http://api.youlook.net/upload/gallery/'
             },
             local: {
                 host: 'http://local.youlook.net/'

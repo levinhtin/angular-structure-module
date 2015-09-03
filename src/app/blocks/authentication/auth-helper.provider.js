@@ -15,9 +15,9 @@
         // };
 
         this.$get = AuthHelper;
-        AuthHelper.$inject = ['$cookies', '$cookieStore'];
+        AuthHelper.$inject = ['$q', '$http', '$cookies', '$cookieStore', 'httpRequest'];
         /* @ngInject */
-        function AuthHelper($cookies, $cookieStore) {
+        function AuthHelper($q, $http, $cookies, $cookieStore, httpRequest) {
             return {
               authenticated: authenticated,
               setLogin: setLogin,
@@ -26,7 +26,8 @@
               updateUserInfo: updateUserInfo,
               setToken: setToken,
               getToken: getToken,
-              logout: logout
+              logout: logout,
+              login: login
             };
 
             function authenticated(){
@@ -47,15 +48,15 @@
             }
 
             function setUserInfo(userInfo){
-              var userViewModel = convertUsertoViewmodel(userInfo)
-              $cookieStore.put('userInfo',userViewModel);
+              $cookieStore.put('userInfo', userInfo);
             }
 
-            function updateUserInfo(userViewModel){
-              $cookieStore.put('userInfo',userViewModel);
+            function updateUserInfo(userInfo){
+              $cookieStore.put('userInfo', userInfo);
             }
 
             function setToken(token){
+              // var access_token = token.replace(/"/g, '');
               $cookieStore.put('token', token);
             }
 
@@ -63,21 +64,25 @@
               return $cookieStore.get('token') || '';
             }
 
-            function logout(successCallback, errorCallback) {
+            function logout(api) {
               var token = $cookieStore.get('token');
+              var userInfo = $cookieStore.get('userInfo');
               $cookieStore.remove('userInfo');
               $cookieStore.remove('token');
-              return $http({
-                url: HOST+"auth/logout",
-                method: "POST",
-                headers: headersHttp.post(),
-              }).success(function(res, status, headers, config){
-                if (typeof successCallback == "function")
-                  successCallback(res);
-              }).error(function(res, status, headers, config){
-                if (typeof errorCallback == "function") 
-                  errorCallback(res);
-              });
+               return httpRequest.post(api).then(function(res){
+                        return res;
+                      });
+            }
+
+            function login(api, viewModel){
+              return httpRequest.post(api, viewModel)
+                      .then(function(res){
+                        if(res.success){
+                          setToken(res.data.access_token);
+                          setUserInfo(res.data.user);
+                        }
+                        return res;
+                      });
             }
         }
     }
