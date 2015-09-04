@@ -15,8 +15,8 @@
         var configs = {
             vnlocal: {
               host: 'http://vnlocal.youlook.net/',
-              hostApi: 'http://api.youlook.net/',
-              hostImg: 'http://api.youlook.net/upload/gallery/'
+              hostApi: 'http://youlook-beta.toancauxanh.vn:7755/',
+              hostImg: 'http://youlook-beta.toancauxanh.vn:7755/upload/gallery/'
             },
             local: {
                 host: 'http://local.youlook.net/'
@@ -34,7 +34,9 @@
                 host: 'http://alpha.youlook.net/'
             },
             vnbeta: {
-                host: 'http://vnbeta.youlook.net/'
+                host: 'http://vnbeta.youlook.net/',
+                hostApi: 'http://youlook-beta.toancauxanh.vn:7755/',
+                hotImg: 'http://youlook-beta.toancauxanh.vn:7755/'
             },
             beta: {
                 host: 'http://beta.youlook.net/'
@@ -44,6 +46,8 @@
             },
             live: {
                 host: 'http://youlook.net/'
+                hostApi: 'http://api.youlook.net/',
+                hostImg: 'http://api.youlook.net/upload/gallery/'
             }
 
         }
