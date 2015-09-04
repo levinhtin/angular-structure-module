@@ -45,7 +45,7 @@
                 host: 'http://vn.youlook.net/'
             },
             live: {
-                host: 'http://youlook.net/'
+                host: 'http://youlook.net/',
                 hostApi: 'http://api.youlook.net/',
                 hostImg: 'http://api.youlook.net/upload/gallery/'
             }
