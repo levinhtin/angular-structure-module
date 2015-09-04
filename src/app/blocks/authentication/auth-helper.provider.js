@@ -23,6 +23,7 @@
               setLogin: setLogin,
               getUserInfo: getUserInfo,
               setUserInfo: setUserInfo,
+              userIdCurent: userIdCurent,
               updateUserInfo: updateUserInfo,
               setToken: setToken,
               getToken: getToken,
@@ -62,6 +63,15 @@
 
             function getToken(){
               return $cookieStore.get('token') || '';
+            }
+
+            function userIdCurent(){
+              var userInfo = this.getUserInfo();
+              if(userInfo != null){
+                return userInfo.id;
+              } else {
+                return null;
+              }
             }
 
             function logout(api) {
