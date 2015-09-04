@@ -54,5 +54,31 @@
         console.log(res);
       });
     }
+
+    function loginWithFb(){
+      self.loadingFb = true;
+      authService.loginWithFB(function(res){
+        action.get("auth/facebook-login?access_token="+res.accessToken, function(res){
+          switch(res.meta.code){
+            case 200:
+              authService.setLogin(res.data.user);
+              if(typeof res.data.user.total_app != "undefined" && res.data.user.total_app > 0 )
+                $location.path('/me/apps');
+              else
+                $location.path('/templates');
+            break;
+            default:
+              if(typeof res.meta.message != "undefined")
+                toaster.pop('error', '', res.meta.message);
+            break;
+          }
+          self.loadingFb = false;
+        }, function(res){
+          // if(typeof res.meta.message != "undefined")
+          //   toaster.pop('error', '', res.meta.message);
+          self.loadingFb = false;
+        });
+      });
+    }
   }
 })();
