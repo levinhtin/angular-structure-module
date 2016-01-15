@@ -1,5 +1,4 @@
 var gulp = require('gulp'),
-  inject = require('gulp-inject'),
   connect = require('gulp-connect'),
 // Include Our Plugins
   // rimraf = require("rimraf"),
@@ -16,6 +15,9 @@ var gulp = require('gulp'),
   gutil = require('gulp-util'),
   using = require('gulp-using'),
   inject = require('gulp-inject');
+var plug = require('gulp-load-plugins')();
+var karma = require('karma').Server;
+var env = plug.util.env;
 //---------------------------------------------
 
 var paths = {
@@ -34,39 +36,6 @@ var paths = {
   vendorFont: ['bower_components/font-awesome/fonts/*',
                'bower_components/bootstrap/dist/fonts/*']
 };
-// var appJs = ['src/app/app.module.js',
-//               'src/app/core/core.module.js',
-//               'src/app/layout/layout.module.js',
-//               'src/app/widgets/widgets.module.js',
-//               'src/app/blocks/detection/detection.module.js',
-//               'src/app/blocks/interceptor/interceptor.module.js',
-//               'src/app/blocks/exception/exception.module.js',
-//               'src/app/blocks/logger/logger.module.js',
-//               'src/app/blocks/router/router.module.js',
-//               'src/app/modules/admin/admin.module.js',
-//               'src/app/modules/feeds/feeds.module.js',
-//               'src/app/modules/home/home.module.js',
-//               'src/app/blocks/detection/detect-device.provider.js',
-//               'src/app/blocks/interceptor/httpInterceptor.factory.js',
-//               'src/app/blocks/exception/exception-handler.provider.js',
-//               'src/app/blocks/exception/exception.js',
-//               'src/app/blocks/logger/logger.js',
-//               'src/app/blocks/router/router-helper.provider.js',
-//               'src/app/core/dataservice.js',
-//               'src/app/core/core.route.js',
-
-//               'src/app/core/config.js',
-//               'src/app/core/constants.js',
-//               'src/app/core/core.detection.js',
-//               'src/app/layout/shell.controller.js',
-//               'src/app/layout/sidebar.controller.js',
-//               // 'src/app/widgets/chatbox.directive.js',
-//               // 'src/app/widgets/ht-img-person.directive.js',
-//               // 'src/app/widgets/ht-widget-header.directive.js',
-//               'src/app/modules/admin/admin.route.js',
-//               'src/app/modules/feeds/feeds.route.js',
-//               'src/app/modules/home/home.route.js'
-//               ];
 
 
 gulp.task('jshint', function(){
@@ -75,6 +44,59 @@ gulp.task('jshint', function(){
     .pipe(jshint.reporter('default'))
     .on('error', gutil.log);
 });
+
+gulp.task('test', function(done) {
+    startTests(true /*singleRun*/ , done);
+  // new karma({
+  //     configFile: __dirname + '/karma.conf.js',
+  //     singleRun: true
+  // }, done).start();
+});
+
+/**
+ * Start the tests using karma.
+ * @param  {boolean} singleRun - True means run once and end (CI), or keep running (dev)
+ * @param  {Function} done - Callback to fire when karma is done
+ * @return {undefined}
+ */
+function startTests(singleRun, done) {
+    var child;
+    var excludeFiles = ['./src/app/**/*spaghetti.js'];
+    var fork = require('child_process').fork;
+
+    // if (env.startServers) {
+    //     log('Starting servers');
+    //     var savedEnv = process.env;
+    //     savedEnv.NODE_ENV = 'dev';
+    //     savedEnv.PORT = 8888;
+    //     child = fork('src/server/app.js', childProcessCompleted);
+    // } else {
+    // }
+        excludeFiles.push('./src/test/midway/**/*.spec.js');
+    karma.start({
+        configFile: __dirname + '/karma.conf.js',
+        exclude: excludeFiles,
+        singleRun: !!singleRun
+    }, karmaCompleted);
+
+    ////////////////
+
+    function childProcessCompleted(error, stdout, stderr) {
+        log('stdout: ' + stdout);
+        log('stderr: ' + stderr);
+        if (error !== null) {
+            log('exec error: ' + error);
+        }
+    }
+
+    function karmaCompleted() {
+        if (child) {
+            child.kill();
+        }
+        done();
+    }
+}
+
 
 //-----------CLEAN--------------------
 gulp.task('clean:js', function() {
@@ -208,7 +230,7 @@ gulp.task('connect', function() {
     root: '.',
     livereload: true,
     port: 80,
-    host: 'vnlocal.youlook.net'
+    host: 'localhost'
   });
 });
 //-----------------RUN--------------------------------

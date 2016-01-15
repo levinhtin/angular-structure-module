@@ -55,6 +55,7 @@
     <script src="../bower_components/ngDialog/js/ngDialog.js"></script>
     <script src="../bower_components/oclazyload/dist/ocLazyLoad.js"></script>
     <script src="../bower_components/toastr/toastr.js"></script>
+    <script src="../bower_components/angular-mocks/angular-mocks.js"></script>
     <script src="../bower_components/angular-translate-storage-cookie/angular-translate-storage-cookie.js"></script>
     <script src="../bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <script src="../bower_components/angular-translate-storage-local/angular-translate-storage-local.js"></script>
@@ -62,9 +63,10 @@
 
     <!-- inject:app:js -->
     <script src="/src/app/app.module.js"></script>
+    <script src="/src/app/avengers/avengers.module.js"></script>
     <script src="/src/app/components/components.module.js"></script>
-    <script src="/src/app/layout/layout.module.js"></script>
     <script src="/src/app/core/core.module.js"></script>
+    <script src="/src/app/layout/layout.module.js"></script>
     <script src="/src/app/widgets/widgets.module.js"></script>
     <script src="/src/app/blocks/authentication/authentication.module.js"></script>
     <script src="/src/app/blocks/detection/detection.module.js"></script>
@@ -89,13 +91,16 @@
     <script src="/src/app/blocks/logger/logger.js"></script>
     <script src="/src/app/blocks/router/router-helper.provider.js"></script>
     <script src="/src/app/blocks/translate/translateLoader.factory.js"></script>
-    <script src="/src/app/layout/shell.controller.js"></script>
-    <script src="/src/app/layout/sidebar.controller.js"></script>
+    <script src="/src/app/avengers/avengers-spaghetti.js"></script>
+    <script src="/src/app/avengers/avengers.js"></script>
+    <script src="/src/app/avengers/config.route.js"></script>
     <script src="/src/app/core/core.config.js"></script>
     <script src="/src/app/core/core.constants.js"></script>
     <script src="/src/app/core/core.run.js"></script>
     <script src="/src/app/core/core.server.js"></script>
     <script src="/src/app/core/dataservice.js"></script>
+    <script src="/src/app/layout/shell.controller.js"></script>
+    <script src="/src/app/layout/sidebar.controller.js"></script>
     <script src="/src/app/widgets/chatbox.directive.js"></script>
     <script src="/src/app/widgets/ht-img-person.directive.js"></script>
     <script src="/src/app/widgets/ht-widget-header.directive.js"></script>
