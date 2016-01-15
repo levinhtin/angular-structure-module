@@ -54,7 +54,7 @@ var paths = {
 //               'src/app/blocks/router/router-helper.provider.js',
 //               'src/app/core/dataservice.js',
 //               'src/app/core/core.route.js',
-              
+
 //               'src/app/core/config.js',
 //               'src/app/core/constants.js',
 //               'src/app/core/core.detection.js',
@@ -67,6 +67,14 @@ var paths = {
 //               'src/app/modules/feeds/feeds.route.js',
 //               'src/app/modules/home/home.route.js'
 //               ];
+
+
+gulp.task('jshint', function(){
+   return gulp.src(paths.appJs)
+    .pipe(jshint())
+    .pipe(jshint.reporter('default'))
+    .on('error', gutil.log);
+});
 
 //-----------CLEAN--------------------
 gulp.task('clean:js', function() {
@@ -97,7 +105,7 @@ gulp.task('concat:js:app', function(){
     .pipe(using())
     .pipe(jshint())
     .pipe(jshint.reporter('default'))
-    .pipe(concat({path: 'app.min.js', cwd: ''}))                     // Make a single file 
+    .pipe(concat({path: 'app.min.js', cwd: ''}))                     // Make a single file
     .pipe(rev())                                    // Suffix a version number to it
     .pipe(gulp.dest(paths.webroot +'dist/js/'))    // Write single versioned file to build/release folder
     .on('error', gutil.log);
@@ -107,11 +115,11 @@ gulp.task('concat:js:vendor', function(){
     .pipe(using())
     // .pipe(sourcemaps.init())
     .pipe(mainBowerFiles('**/*.js'))
-    .pipe(concat({path: 'vendor.min.js', cwd: ''}))                     // Make a single file 
+    .pipe(concat({path: 'vendor.min.js', cwd: ''}))                     // Make a single file
     .pipe(rev())                                    // Suffix a version number to it
     // .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest(paths.webroot +'dist/js/'))   // Write single versioned file to build/release folder
-    .on('error', gutil.log); 
+    .on('error', gutil.log);
 });
 
 gulp.task('concat:js', ['clean:js', 'concat:js:vendor', 'concat:js:app']);
@@ -125,7 +133,7 @@ gulp.task('min:js:app', function(){
     .pipe(using())
     .pipe(jshint())
     .pipe(jshint.reporter('default'))
-    .pipe(concat({path: 'app.min.js', cwd: ''}))                     // Make a single file 
+    .pipe(concat({path: 'app.min.js', cwd: ''}))                     // Make a single file
     .pipe(uglify())                                 // Make the file titchy tiny small
     .pipe(rev())                                    // Suffix a version number to it
     .pipe(sourcemaps.write('.'))
@@ -138,12 +146,12 @@ gulp.task('min:js:vendor', function(){
     .pipe(using())
     .pipe(sourcemaps.init())
     .pipe(mainBowerFiles('**/*.js'))
-    .pipe(concat({path: 'vendor.min.js', cwd: ''}))                     // Make a single file 
+    .pipe(concat({path: 'vendor.min.js', cwd: ''}))                     // Make a single file
     .pipe(uglify())                                 // Make the file titchy tiny small
     .pipe(rev())                                    // Suffix a version number to it
     .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest(paths.webroot +'dist/js/'))   // Write single versioned file to build/release folder
-    .on('error', gutil.log); 
+    .on('error', gutil.log);
 });
 
 gulp.task('min:js', ['clean:js', 'min:js:vendor', 'min:js:app']);
@@ -151,11 +159,11 @@ gulp.task('min:js', ['clean:js', 'min:js:vendor', 'min:js:app']);
 gulp.task('min:css:vendor', function(){
   return gulp.src(paths.vendorCss)
     .pipe(using())
-    .pipe(concat({path: 'vendor.min.css', cwd: ''}))                     // Make a single file 
+    .pipe(concat({path: 'vendor.min.css', cwd: ''}))                     // Make a single file
     .pipe(minifyCss())                                 // Make the file titchy tiny small
     .pipe(rev())                                    // Suffix a version number to it
     .pipe(gulp.dest(paths.webroot +'dist/css/'))   // Write single versioned file to build/release folder
-    .on('error', gutil.log); 
+    .on('error', gutil.log);
 });
 gulp.task('min:css', ['clean:css', 'min:css:vendor']);
 gulp.task('min', ['min:js', 'min:css']);
@@ -173,8 +181,8 @@ gulp.task('html:dev', function () {
     .pipe(inject(gulp.src('./bower.json', {read:true}).pipe(mainBowerFiles()), {relative: true, starttag: '<!-- inject:vendor:{{ext}} -->'}))
     .pipe(inject(gulp.src(paths.appCss, {read: false}), {starttag: '<!-- inject:app:{{ext}} -->'}))
     .pipe(inject(gulp.src(paths.vendorCss, {read: false}), {starttag: '<!-- inject:vendor:{{ext}} -->'}))
-    .pipe(gulp.dest(paths.webroot)); 
-    
+    .pipe(gulp.dest(paths.webroot));
+
 });
 
 gulp.task('html:debug', ['concat'], function () {
@@ -183,7 +191,7 @@ gulp.task('html:debug', ['concat'], function () {
     .pipe(inject(gulp.src(paths.webroot +'dist/**/app*.min.js', {read: false}), {starttag: '<!-- inject:app:{{ext}} -->'}))
     .pipe(inject(gulp.src(paths.webroot +'dist/**/vendor*.min.js', {read: false}), {starttag: '<!-- inject:vendor:{{ext}} -->'}))
     .pipe(inject(gulp.src(paths.vendorCss, {read: false}), {starttag: '<!-- inject:vendor:{{ext}} -->'}))
-    .pipe(gulp.dest(paths.webroot));  
+    .pipe(gulp.dest(paths.webroot));
 });
 
 gulp.task('html:release', ['min'], function () {
@@ -192,7 +200,7 @@ gulp.task('html:release', ['min'], function () {
     .pipe(inject(gulp.src(paths.webroot +'dist/js/app*.min.js', {read: false}), {starttag: '<!-- inject:app:{{ext}} -->'}))
     .pipe(inject(gulp.src(paths.webroot +'dist/js/vendor*.min.js', {read: false}), {starttag: '<!-- inject:vendor:{{ext}} -->'}))
     .pipe(inject(gulp.src(paths.webroot +'dist/css/vendor*.min.css', {read: false}), {starttag: '<!-- inject:vendor:{{ext}} -->'}))
-    .pipe(gulp.dest(paths.webroot));  
+    .pipe(gulp.dest(paths.webroot));
 });
 //-----------------SERVER-----------------------------------
 gulp.task('connect', function() {
