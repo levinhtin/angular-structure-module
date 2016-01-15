@@ -11,4 +11,4 @@ install:
   - bower install
 
 after_script:
-  - gulp build:dev
+  - gulp jshint
