@@ -1,99 +1,99 @@
 /* Help configure the state-base ui.router */
 (function() {
-    'use strict';
+  'use strict';
 
-    angular
-        .module('blocks.authentication')
-        .provider('authHelper', authHelperProvider);
+  angular
+    .module('blocks.authentication')
+    .provider('authHelper', authHelperProvider);
 
-    authHelperProvider.$inject = [];
+  authHelperProvider.$inject = [];
+  /* @ngInject */
+  function authHelperProvider() {
+
+    // this.configure = function(cfg) {
+    //     angular.extend(config, cfg);
+    // };
+
+    this.$get = AuthHelper;
+    AuthHelper.$inject = ['$q', '$http', '$cookies', '$cookieStore', 'httpRequest'];
     /* @ngInject */
-    function authHelperProvider() {
+    function AuthHelper($q, $http, $cookies, $cookieStore, httpRequest) {
+      return {
+        authenticated: authenticated,
+        setLogin: setLogin,
+        getUserInfo: getUserInfo,
+        setUserInfo: setUserInfo,
+        userIdCurent: userIdCurent,
+        updateUserInfo: updateUserInfo,
+        setToken: setToken,
+        getToken: getToken,
+        logout: logout,
+        login: login
+      };
 
-        // this.configure = function(cfg) {
-        //     angular.extend(config, cfg);
-        // };
+      function authenticated() {
+        var token = $cookies.get("token");
+        if (token != undefined)
+          return true;
+        else
+          return false;
+      }
 
-        this.$get = AuthHelper;
-        AuthHelper.$inject = ['$q', '$http', '$cookies', '$cookieStore', 'httpRequest'];
-        /* @ngInject */
-        function AuthHelper($q, $http, $cookies, $cookieStore, httpRequest) {
-            return {
-              authenticated: authenticated,
-              setLogin: setLogin,
-              getUserInfo: getUserInfo,
-              setUserInfo: setUserInfo,
-              userIdCurent: userIdCurent,
-              updateUserInfo: updateUserInfo,
-              setToken: setToken,
-              getToken: getToken,
-              logout: logout,
-              login: login
-            };
+      function setLogin(userInfo) {
+        this.setUserInfo(userInfo);
+        this.setToken(userInfo.access_token);
+      }
 
-            function authenticated(){
-              var token = $cookies.get("token");
-              if(token != undefined)
-                return true;
-              else 
-                return false;
-            }
+      function getUserInfo() {
+        return $cookieStore.get('userInfo');
+      }
 
-            function setLogin(userInfo) {
-              this.setUserInfo(userInfo);
-              this.setToken(userInfo.access_token);
-            }
+      function setUserInfo(userInfo) {
+        $cookieStore.put('userInfo', userInfo);
+      }
 
-            function getUserInfo(){
-              return $cookieStore.get('userInfo');
-            }
+      function updateUserInfo(userInfo) {
+        $cookieStore.put('userInfo', userInfo);
+      }
 
-            function setUserInfo(userInfo){
-              $cookieStore.put('userInfo', userInfo);
-            }
+      function setToken(token) {
+        // var access_token = token.replace(/"/g, '');
+        $cookieStore.put('token', token);
+      }
 
-            function updateUserInfo(userInfo){
-              $cookieStore.put('userInfo', userInfo);
-            }
+      function getToken() {
+        return $cookieStore.get('token') || '';
+      }
 
-            function setToken(token){
-              // var access_token = token.replace(/"/g, '');
-              $cookieStore.put('token', token);
-            }
-
-            function getToken(){
-              return $cookieStore.get('token') || '';
-            }
-
-            function userIdCurent(){
-              var userInfo = this.getUserInfo();
-              if(userInfo != null){
-                return userInfo.id;
-              } else {
-                return null;
-              }
-            }
-
-            function logout(api) {
-              var token = $cookieStore.get('token');
-              var userInfo = $cookieStore.get('userInfo');
-              $cookieStore.remove('userInfo');
-              $cookieStore.remove('token');
-               return httpRequest.post(api).then(function(res){
-                        return res;
-                      });
-            }
-
-            function login(api, viewModel){
-              return httpRequest.post(api, viewModel)
-                      .then(function(res){
-                        if(res.success){
-                          setToken(res.data.access_token);
-                          setUserInfo(res.data.user);
-                        }
-                        return res;
-                      });
-            }
+      function userIdCurent() {
+        var userInfo = this.getUserInfo();
+        if (userInfo != null) {
+          return userInfo.id;
+        } else {
+          return null;
         }
+      }
+
+      function logout(api) {
+        var token = $cookieStore.get('token');
+        var userInfo = $cookieStore.get('userInfo');
+        $cookieStore.remove('userInfo');
+        $cookieStore.remove('token');
+        return httpRequest.post(api).then(function(res) {
+          return res;
+        });
+      }
+
+      function login(api, viewModel) {
+        return httpRequest.post(api, viewModel)
+          .then(function(res) {
+            if (res.success) {
+              setToken(res.data.access_token);
+              setUserInfo(res.data.user);
+            }
+            return res;
+          });
+      }
     }
+  }
 })();
