@@ -1,7 +1,5 @@
 var gulp = require('gulp'),
   connect = require('gulp-connect'),
-  // Include Our Plugins
-  // rimraf = require("rimraf"),
   concat = require("gulp-concat"),
   cssmin = require("gulp-cssmin"),
   minifyCss = require('gulp-minify-css'),
