@@ -4,12 +4,13 @@
     var core = angular.module('app.core');
 
     core.config(interceptorConfig);
-    interceptorConfig.$inject = ['$httpProvider']; 
+    interceptorConfig.$inject = ['$httpProvider'];
     function interceptorConfig($httpProvider) {
       $httpProvider.interceptors.push('ylHttpInterceptor');
     }
 
     core.config(toastrConfig);
+
 
     /* @ngInject */
     toastrConfig.$inject = ['toastr'];
@@ -43,9 +44,9 @@
       routerHelperProvider.configure({docTitle: config.appTitle + ' | '});
 
       //---Translate
-      $translateProvider.useLoader('customTranslateLoader', { 
+      $translateProvider.useLoader('customTranslateLoader', {
         prefix: 'data/langs/',
-        suffix: '.json' 
+        suffix: '.json'
       });
       /* location and route configuration stuff... */
       $translateProvider.preferredLanguage('vi');
