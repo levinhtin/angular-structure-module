@@ -5,9 +5,9 @@
         .module('app.module.home')
         .controller('HomeController', HomeController);
 
-    HomeController.$inject = [];
+    HomeController.$inject = ['$q'];
     /* @ngInject */
-    function HomeController() {
+    function HomeController($q) {
         var vm = this;
         vm.news = {
             title: 'helloWorld',
