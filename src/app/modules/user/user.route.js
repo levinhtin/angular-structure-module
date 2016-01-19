@@ -21,12 +21,6 @@
                 templateUrl: 'src/app/modules/user/user.html',
                 controller: 'UserController',
                 controllerAs: 'user',
-                resolve: { // Any property in resolve should return a promise and is executed before the view is loaded
-                    loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
-                        // you can lazy load files for an existing module
-                        return $ocLazyLoad.load('/src/app/modules/user/user.controller.js');
-                    }]
-                },
                 title: 'User',
                 settings: {
                     nav: 1,
@@ -41,12 +35,6 @@
                 templateUrl: 'src/app/modules/user/userProfile.html',
                 controller: 'UserProfileController',
                 controllerAs: 'profile',
-                resolve: { // Any property in resolve should return a promise and is executed before the view is loaded
-                    loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
-                        // you can lazy load files for an existing module
-                        return $ocLazyLoad.load('/src/app/modules/user/userProfile.controller.js');
-                    }]
-                },
                 title: 'My Profile',
                 settings: {
                     nav: 1,
@@ -64,12 +52,6 @@
                 templateUrl: 'src/app/modules/user/user.adaptive.html',
                 controller: 'UserController',
                 controllerAs: 'vm',
-                resolve: { // Any property in resolve should return a promise and is executed before the view is loaded
-                    loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
-                        // you can lazy load files for an existing module
-                        return $ocLazyLoad.load('/src/app/modules/user/user.controller.js');
-                    }]
-                },
                 title: 'User',
                 settings: {
                     nav: 1,
@@ -84,12 +66,6 @@
                 templateUrl: 'src/app/modules/user/userProfile.adaptive.html',
                 controller: 'UserProfileController',
                 controllerAs: 'vm',
-                resolve: { // Any property in resolve should return a promise and is executed before the view is loaded
-                    loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
-                        // you can lazy load files for an existing module
-                        return $ocLazyLoad.load('/src/app/modules/user/userProfile.controller.js');
-                    }]
-                },
                 title: 'My Profile',
                 settings: {
                     nav: 1,

@@ -20,12 +20,6 @@
                     templateUrl: 'src/app/modules/feed/feed.html',
                     controller: 'FeedController',
                     controllerAs: 'vm',
-                    resolve: { // Any property in resolve should return a promise and is executed before the view is loaded
-                        loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
-                            // you can lazy load files for an existing module
-                            return $ocLazyLoad.load('/src/app/modules/feed/feed.controller.js');
-                        }]
-                    },
                     title: 'Feed',
                     settings: {
                         nav: 1,

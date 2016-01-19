@@ -5,9 +5,9 @@
         .module('app.module.home')
         .controller('HomeController', HomeController);
 
-    HomeController.$inject = ['$q', 'logger', 'dataservice'];
+    HomeController.$inject = [];
     /* @ngInject */
-    function HomeController($q, logger, dataservice) {
+    function HomeController() {
         var vm = this;
         vm.news = {
             title: 'helloWorld',
@@ -17,14 +17,14 @@
         vm.people = [];
         vm.title = 'Dashboard';
 
-        activate();
-
-        function activate() {
-            // var promises = [getMessageCount(), getPeople()];
-            var promises = [];
-            return $q.all(promises).then(function() {
-                logger.info('Activated Dashboard View');
-            });
-        };
+        // activate();
+        //
+        // function activate() {
+        //     // var promises = [getMessageCount(), getPeople()];
+        //     var promises = [];
+        //     return $q.all(promises).then(function() {
+        //         logger.info('Activated Dashboard View');
+        //     });
+        // };
     }
 })();

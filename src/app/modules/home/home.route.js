@@ -21,12 +21,6 @@
                         templateUrl: 'src/app/modules/home/home.html',
                         controller: 'HomeController',
                         controllerAs: 'vm',
-                        resolve: { // Any property in resolve should return a promise and is executed before the view is loaded
-                            loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
-                                // you can lazy load files for an existing module
-                                return $ocLazyLoad.load('/src/app/modules/home/home.controller.js');
-                            }]
-                        },
                         title: 'Home',
                         settings: {
                             nav: 1,
@@ -35,7 +29,7 @@
                     }
                 }
             ];
-            
+
         } else{
             return [
                 {
@@ -45,12 +39,6 @@
                         templateUrl: 'src/app/modules/home/home.adaptive.html',
                         controller: 'HomeController',
                         controllerAs: 'vm',
-                        resolve: { // Any property in resolve should return a promise and is executed before the view is loaded
-                            loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
-                                // you can lazy load files for an existing module
-                                return $ocLazyLoad.load('/src/app/modules/home/home.controller.js');
-                            }]
-                        },
                         title: 'Home',
                         settings: {
                             nav: 1,

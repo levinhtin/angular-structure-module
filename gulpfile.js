@@ -25,10 +25,16 @@ var eslint = require('gulp-eslint');
 var paths = {
   webroot: './',
   appJs: ['./src/app/**/*.module.js',
-          './src/app/blocks/**/*.js',
-          './src/app/**/*.js',
-          '!./src/app/**/*.spec.js',
-          '!./src/app/modules/**/*.controller.js'],
+          './src/app/**/*.provider.js',
+          './src/app/**/*.sevice.js',
+          './src/app/**/*.factory.js',
+          './src/app/core/core.constants.js',
+          './src/app/core/core.config.js',
+          './src/app/core/core.run.js',
+
+          './src/app/**/*.route.js',
+          './src/app/**/*.controller.js',
+          '!./src/app/**/*.spec.js'],
   appCss: ['src/styles/styles.css'],
   vendorCss: ['bower_components/bootstrap/dist/css/bootstrap.css',
               'bower_components/font-awesome/css/font-awesome.css',
@@ -250,7 +256,7 @@ gulp.task('connect', function() {
   connect.server({
     root: '.',
     livereload: true,
-    port: 80,
+    port: 8080,
     host: 'localhost'
   });
 });
